@@ -11,18 +11,19 @@
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/new_list"
+        android:id="@+id/news_list"
         android:name="com.example.noeliasales.bbcnews.NewListFragment"
-        android:layout_width="@dimen/item_width"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.example.noeliasales.bbcnews.activities.MainActivity"
         tools:listitem="@layout/news_list_content" />
 
     <FrameLayout
-        android:id="@+id/new_detail_container"
+        android:id="@+id/news_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="2" />
 
 </LinearLayout>

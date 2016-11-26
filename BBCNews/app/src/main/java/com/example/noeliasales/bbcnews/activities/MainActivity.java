@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.new_list)
+    @BindView(R.id.news_list)
     RecyclerView newsListView;
 
     @Override
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setup();
         getData();
 
-        if (findViewById(R.id.new_detail_container) != null) {
+        if (findViewById(R.id.news_detail_container) != null) {
             mTwoPane = true;
         }
     }
@@ -75,27 +75,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        NewsApi api = RetrofitServiceGenerator.createService(NewsApi.class);
-        Call<News> call = api.get();
+        if (mNewsItems.size() == 0) {
+            NewsApi api = RetrofitServiceGenerator.createService(NewsApi.class);
+            Call<News> call = api.get();
 
-        call.enqueue(new Callback<News>() {
-            @Override
-            public void onResponse(Call<News> call, Response<News> response) {
-                if (response.isSuccessful()) {
-                    News news = response.body();
+            call.enqueue(new Callback<News>() {
+                @Override
+                public void onResponse(Call<News> call, Response<News> response) {
+                    if (response.isSuccessful()) {
+                        News news = response.body();
 
-                    mNewsItems = new ArrayList<>(news.channel.newsItems);
-                    newsListAdapter.notifyDataSetChanged();
-                } else {
-                    Log.d("ERROR", "on RESPONSE");
+                        mNewsItems = new ArrayList<>(news.channel.newsItems);
+                        newsListAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.d("ERROR", "on RESPONSE");
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<News> call, Throwable t) {
-                Log.d("ERROR", "on FAILURE");
-            }
-        });
+                @Override
+                public void onFailure(Call<News> call, Throwable t) {
+                    Log.d("ERROR", "on FAILURE");
+                }
+            });
+        }
     }
 
     public List<NewsItem> getItems() {

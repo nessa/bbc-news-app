@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.example.noeliasales.bbcnews.activities.NewsItemDetailActivity;
 import com.example.noeliasales.bbcnews.R;
@@ -20,6 +22,9 @@ public class NewsItemDetailFragment extends Fragment {
 
     @BindView(R.id.web_view)
     WebView webView;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     public NewsItemDetailFragment() {
     }
@@ -40,7 +45,21 @@ public class NewsItemDetailFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         if (mURL != null) {
+            //webView.getSettings().setJavaScriptEnabled(true);
+
+            webView.setWebChromeClient(new WebChromeClient(){
+
+                public void onProgressChanged(WebView view, int progress) {
+                    progressBar.setProgress(progress);
+                    if (progress == 100) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                }
+            });
+
             webView.loadUrl(mURL);
+        } else {
+            progressBar.setVisibility(View.GONE);
         }
 
         return rootView;

@@ -1,8 +1,25 @@
-<WebView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/web_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/basic_margin"
-    tools:context="com.example.noeliasales.bbcnews.fragments.NewsItemDetailFragment" />
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0" />
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/basic_margin"
+        tools:context="com.example.noeliasales.bbcnews.fragments.NewsItemDetailFragment" />
+
+</LinearLayout>
