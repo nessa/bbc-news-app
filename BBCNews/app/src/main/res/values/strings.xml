@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BBC News</string>
+    <string name="title_new_detail">New Detail</string>
+
+    <string name="news_list">"News list"</string>
+    <string name="search_hint">Search…</string>
+    <string name="image_placeholder">Image</string>
+</resources>

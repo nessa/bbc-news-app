@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="basic_margin">16dp</dimen>
+    <dimen name="min_margin">8dp</dimen>
+
+    <!-- News list -->
+    <dimen name="news_list_image_height">120dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+</resources>
