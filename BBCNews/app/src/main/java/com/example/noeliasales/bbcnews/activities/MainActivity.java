@@ -1,12 +1,18 @@
 package com.example.noeliasales.bbcnews.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 
 import com.example.noeliasales.bbcnews.fragments.NewsItemDetailFragment;
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         return mNewsItems;
     }
 
-    public void selectItem(int position) {
+    public void selectItem(int position, ImageView imageView) {
 
         NewsItem item = mNewsItems.get(position);
 
@@ -115,14 +121,26 @@ public class MainActivity extends AppCompatActivity {
             NewsItemDetailFragment fragment = new NewsItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.new_detail_container, fragment)
+                    .replace(R.id.news_detail_container, fragment)
                     .commit();
         } else {
+
             Intent intent = new Intent(this, NewsItemDetailActivity.class);
             intent.putExtra(NewsItemDetailActivity.NEWS_ITEM_TITLE, item.title);
+            intent.putExtra(NewsItemDetailActivity.NEWS_ITEM_IMAGE_URL, item.thumbnail.url);
             intent.putExtra(NewsItemDetailActivity.NEWS_ITEM_WEB_URL, item.link);
 
-            this.startActivity(intent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // Material transition
+
+                Pair<View, String> p1 = Pair.create((View) imageView, getString(R.string.transition_image));
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1);
+
+                ActivityCompat.startActivity(this, intent, options.toBundle());
+            } else {
+                // Pre material transition
+                this.startActivity(intent);
+            }
         }
     }
 }

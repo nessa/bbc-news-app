@@ -1,13 +1,14 @@
 package com.example.noeliasales.bbcnews.activities;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.noeliasales.bbcnews.R;
 import com.example.noeliasales.bbcnews.fragments.NewsItemDetailFragment;
 
@@ -22,9 +23,13 @@ public class NewsItemDetailActivity extends AppCompatActivity {
      */
     public static final String NEWS_ITEM_TITLE = "news_item_title";
     public static final String NEWS_ITEM_WEB_URL = "news_item_web_url";
+    public static final String NEWS_ITEM_IMAGE_URL = "news_item_image_url";
 
     @BindView(R.id.detail_toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.detail_image)
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,13 @@ public class NewsItemDetailActivity extends AppCompatActivity {
             String title = getIntent().getStringExtra(NEWS_ITEM_TITLE);
             if (title != null && title.length() > 0) {
                 setTitle(title);
+            }
+
+            String imageURL = getIntent().getStringExtra(NEWS_ITEM_IMAGE_URL);
+            if (imageURL != null && imageURL.length() > 0) {
+                Glide.with(this)
+                        .load(imageURL)
+                        .into(imageView);
             }
 
             // Create the detail fragment and add it to the activity

@@ -49,13 +49,12 @@ public class NewsListAdapter
 
         Glide.with(context)
                 .load(item.thumbnail.url)
-                .centerCrop()
                 .into(holder.mImage);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsListAdapter.this.context.selectItem((int) v.getTag());
+                NewsListAdapter.this.context.selectItem((int) v.getTag(), holder.mImage);
             }
         });
     }
