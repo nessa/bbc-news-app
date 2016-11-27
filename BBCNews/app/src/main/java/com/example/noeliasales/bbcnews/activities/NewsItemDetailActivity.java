@@ -69,7 +69,7 @@ public class NewsItemDetailActivity extends AppCompatActivity {
             NewsItemDetailFragment fragment = new NewsItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.new_detail_container, fragment)
+                    .add(R.id.news_detail_container, fragment)
                     .commit();
         }
     }
